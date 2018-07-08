@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+
+wechat:
+  appId: wx6e9ee6ef047acaa7
+  secret: 4dd7dde2ecf8b50efe21a99b64b71a03
+
+logging:
+  level.root: info
+  level.web.page.authorization: debug
+  file: G:/mylog/authorization.log
