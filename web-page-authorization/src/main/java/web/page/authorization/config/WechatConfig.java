@@ -19,19 +19,6 @@ public class WechatConfig {
     @Autowired
     private WechatProperties wechatProperties;
 
-//    /**
-//     * 配置WxMpService所需信息
-//     * @return
-//     */
-//    @Bean
-//    public WxMpService wxMpService(){
-//        WxMpService wxMpService = new WxMpServiceImpl();
-//        // 设置配置信息的存储位置
-//        wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
-//
-//        return wxMpService;
-//    }
-
     @Bean
     public IAuthorizationService authorizationService(){
         IAuthorizationService authorizationService = new AuthorizationServiceImpl();
@@ -39,17 +26,4 @@ public class WechatConfig {
         authorizationService.setSecret(wechatProperties.getSecret());
         return authorizationService;
     }
-
-//    /**
-//     * 配置appID和appsecret
-//     * @return
-//     */
-//    @Bean
-//    public WxMpConfigStorage wxMpConfigStorage(){
-//        WxMpInMemoryConfigStorage wxMpInMemoryConfigStorage = new WxMpInMemoryConfigStorage();
-//        wxMpInMemoryConfigStorage.setAppId(wechatProperties.getAppId());
-//        wxMpInMemoryConfigStorage.setSecret(wechatProperties.getSecret());
-//        return wxMpInMemoryConfigStorage;
-//    }
-
 }
