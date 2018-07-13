@@ -10,11 +10,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>web-page-authorization</artifactId>
+    <artifactId>wechat-pay</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>web-page-authorization</name>
-    <description>wechat-operation 集成网页微信授权</description>
+    <name>wechat-pay</name>
+    <description>wechat-pay 微信支付</description>
 
     <dependencies>
         <dependency>
@@ -54,14 +54,14 @@
     </dependencies>
 
     <build>
-        <finalName>web-page-authorization</finalName>
+        <finalName>wechat-pay</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>web.page.authorization.AuthorizationApplication</mainClass>
+                    <mainClass>wechat.pay.PayApplication</mainClass>
                     <fork>true</fork>
                 </configuration>
                 <executions>
@@ -94,4 +94,6 @@
             </resource>
         </resources>
     </build>
+
+
 </project>
