@@ -1,0 +1,138 @@
+body {
+    padding: 0px;
+    margin: 0px auto;
+}
+
+body {
+    background-color: #EEE;
+}
+
+.i-assets-container {
+    border: 1px solid #E1E1E1;
+    vertical-align: top;
+    display: block;
+    background-color: #FFF;
+    margin: 5px 10px;
+    color: #A1A1A1 !important;
+}
+
+#container.ui-container {
+    color: #666;
+}
+
+.i-assets-content {
+    margin: 10px 10px 10px 20px;
+}
+
+.fn-clear:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0px;
+    content: " ";
+    clear: both;
+    height: 0px;
+}
+
+.i-assets-header h3 {
+    font-size: 14px;
+}
+
+.fn-left {
+    display: inline;
+    float: left;
+}
+
+h3 {
+    margin: 0px;
+    padding: 0px;
+    font: 12px/1.5 tahoma, arial, "Hiragino Sans GB", "Microsoft Yahei",
+    "宋体";
+}
+
+.i-assets-balance-amount {
+    line-height: 24px;
+    margin-right: 20px;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: 400;
+    color: #666;
+    margin-left: 25px;
+}
+
+.amount .fen {
+    font-size: 18px;
+}
+
+#wx_bottom {
+    display: flex;
+}
+
+#wx_bottom {
+    overflow: hidden;
+    margin: 15px 0px;
+}
+
+#wx_bottom {
+    display: box;
+    display: -ms-box;
+    display: -webkit-box;
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+
+#wx_bottom  .a {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin: 0px 10px;
+    border: 1px solid #DDD;
+    text-align: center;
+    border-radius: 3px;
+    color: #666;
+    background: #fff;
+    text-decoration: none;
+}
+
+.WX_search {
+    background-color: #EFEFEF;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    border-bottom: 1px solid #DDD;
+    text-align: center;
+}
+
+.pay_buttom {
+    margin: 15px 0px;
+    width: 100%;
+    display: box;
+    display: -ms-box;
+    display: -webkit-box;
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    width: 100%;
+}
+
+.pay_buttom a {
+    height: 40px;
+    line-height: 40px;
+    margin: 0px 10px;
+    border: 1px solid #DDD;
+    text-align: center;
+    border-radius: 3px;
+    color: #666;
+    background: #fff;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    flex: 1;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    box-flex: 1;
+    -ms-box-flex: 1;
+    -webkit-box-flex: 1;
+}
