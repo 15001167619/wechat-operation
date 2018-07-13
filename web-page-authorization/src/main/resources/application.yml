@@ -1,13 +1,14 @@
 server:
-  port: 8080
+  port: 80
 
 spring:
   profiles:
     active: dev
 
 wechat:
-  appId: wx6e9ee6ef047acaa7
-  secret: 4dd7dde2ecf8b50efe21a99b64b71a03
+  appId: XXXXXX
+  secret: XXXXXXXXXXXXX
+  redirectUrl: http://www.XXXX.com  #微信网页授权配置 回调域名
 
 logging:
   level.root: info

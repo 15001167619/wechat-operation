@@ -15,9 +15,13 @@ public interface IAuthorizationService {
 
     String getSecret();
 
+    String getRedirectUrl();
+
     void setAppId(String appId);
 
     void setSecret(String secret);
+
+    void setRedirectUrl(String redirectUrl);
 
     public WxOAuth2AccessToken oauth2getAccessToken(String code);
 

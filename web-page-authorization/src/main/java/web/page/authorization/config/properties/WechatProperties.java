@@ -34,5 +34,9 @@ public class WechatProperties {
      * 设置微信公众号的EncodingAESKey
      */
     private String aesKey;
+    /**
+     * 设置微信公众号 回调路径
+     */
+    private String redirectUrl;
 
 }

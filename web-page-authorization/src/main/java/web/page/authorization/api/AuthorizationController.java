@@ -38,7 +38,7 @@ public class AuthorizationController {
      */
     @GetMapping(value = "authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
-        String url = "http://yqc9dz.natappfree.cc/wechat/getOpenId";
+        String url = authorizationService.getRedirectUrl()+"/wechat/getOpenId";
         // 获取微信返回的重定向url
         String redirectUrl = authorizationService.oauth2buildAuthorizationUrl(url, WxConstants.OAuth2Scope.SNSAPI_BASE, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code，redirectUrl = {}", redirectUrl);
@@ -52,7 +52,7 @@ public class AuthorizationController {
      */
     @GetMapping(value = "authorizeUserInfo")
     public String authorizeUserInfo(@RequestParam("returnUrl") String returnUrl) {
-        String url = "http://yqc9dz.natappfree.cc/wechat/getUserInfo";
+        String url = authorizationService.getRedirectUrl()+"/wechat/getUserInfo";
         // 获取微信返回的重定向url
         String redirectUrl = authorizationService.oauth2buildAuthorizationUrl(url, WxConstants.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code，redirectUrl = {}", redirectUrl);

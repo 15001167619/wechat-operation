@@ -18,6 +18,7 @@ public class AuthorizationServiceImpl implements IAuthorizationService {
 
     protected volatile String appId;
     protected volatile String secret;
+    protected String redirectUrl;
 
     @Override
     public String getAppId() {
@@ -35,8 +36,18 @@ public class AuthorizationServiceImpl implements IAuthorizationService {
     }
 
     @Override
+    public String getRedirectUrl() {
+        return this.redirectUrl;
+    }
+
+    @Override
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    @Override
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 
     @Override

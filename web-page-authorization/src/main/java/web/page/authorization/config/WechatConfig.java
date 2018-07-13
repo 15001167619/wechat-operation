@@ -24,6 +24,7 @@ public class WechatConfig {
         IAuthorizationService authorizationService = new AuthorizationServiceImpl();
         authorizationService.setAppId(wechatProperties.getAppId());
         authorizationService.setSecret(wechatProperties.getSecret());
+        authorizationService.setRedirectUrl(wechatProperties.getRedirectUrl());
         return authorizationService;
     }
 }
