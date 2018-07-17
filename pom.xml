@@ -26,6 +26,7 @@
     <modules>
         <module>web-page-authorization</module>
         <module>wechat-pay</module>
+        <module>wechat-message</module>
     </modules>
 
     <parent>
