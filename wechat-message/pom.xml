@@ -13,7 +13,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>wechat-message</name>
-    <description>wechat-message 微信消息处理</description>
+    <description>wechat-message 微信公众号消息处理、扫码关注等事件监听以及微信公众号菜单生成</description>
 
 
     <dependencies>
@@ -56,6 +56,13 @@
             <artifactId>jdom</artifactId>
             <version>${jdom.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5</version>
+        </dependency>
+
+
 
 
     </dependencies>
