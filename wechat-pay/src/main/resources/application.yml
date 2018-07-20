@@ -22,7 +22,7 @@ spring:
 wechat:
   appId: XXX
   mchKey: XXXX
-  callbackUrl: /wechat/wxPay
+  callbackUrl: /wechat/pay
   mchId: XXXX
   redirectUrl: http://www.XXXX.com
 

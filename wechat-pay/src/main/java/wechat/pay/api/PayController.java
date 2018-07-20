@@ -20,9 +20,8 @@ import wechat.pay.utils.WXUtil;
 import wechat.pay.utils.XMLUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -42,7 +41,7 @@ public class PayController {
     @RequestMapping(value = "wxPay",method = RequestMethod.POST)
     public @ResponseBody
     JSONObject wxPay(HttpServletRequest request,
-                     String commodityName, double totalPrice) throws Exception {
+                     String commodityName, double totalPrice){
         /**
          * 总金额(分为单位)
          */
@@ -257,6 +256,78 @@ public class PayController {
         }
         sb.append("</xml>");
         return sb.toString();
+    }
+
+    /***
+     * 付款成功回调处理
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "pay")
+    public @ResponseBody void notify_success(HttpServletRequest request,
+                                             HttpServletResponse response) throws IOException, JDOMException {
+        log.info("微信支付成功调用回调URL");
+        InputStream inStream = request.getInputStream();
+        ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while ((len = inStream.read(buffer)) != -1) {
+            outSteam.write(buffer, 0, len);
+        }
+        log.info("~~~~~~~~~~~~~~~~付款成功~~~~~~~~~");
+        outSteam.close();
+        inStream.close();
+
+        /** 支付成功后，微信回调返回的信息 */
+        String result = new String(outSteam.toByteArray(), "utf-8");
+        log.info("微信返回的订单支付信息:" + result);
+        Map<Object, Object> map = XMLUtil.doXMLParse(result);
+
+        // 用于验签
+        SortedMap<Object, Object> parameters = new TreeMap<Object, Object>();
+        for (Object keyValue : map.keySet()) {
+            /** 输出返回的订单支付信息 */
+            log.info(keyValue + "=" + map.get(keyValue));
+            if (!"sign".equals(keyValue)) {
+                parameters.put(keyValue, map.get(keyValue));
+            }
+        }
+        if (map.get("result_code").toString().equalsIgnoreCase("SUCCESS")) {
+            // 先进行校验，是否是微信服务器返回的信息
+            String mchKey = payService.getMchKey();
+            String checkSign = createSign("UTF-8", parameters,mchKey);
+            log.info("对服务器返回的结果进行签名：" + checkSign);
+            log.info("服务器返回的结果签名：" + map.get("sign"));
+            if (checkSign.equals(map.get("sign"))) {// 如果签名和服务器返回的签名一致，说明数据没有被篡改过
+                log.info("签名校验成功，信息合法，未被篡改过");
+                //告诉微信服务器，我收到信息了，不要再调用回调方法了
+                /**如果不返回SUCCESS的信息给微信服务器，则微信服务器会在一定时间内，多次调用该回调方法，如果最终还未收到回馈，微信默认该订单支付失败*/
+                /** 微信默认会调用8次该回调地址 */
+                OutputStream outputStream = null;
+                try {
+                    outputStream = response.getOutputStream();
+                    outputStream.flush();
+                    outputStream.write(setXML("SUCCESS", "").getBytes());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    try {
+                        outputStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                log.info("-------------" + setXML("SUCCESS", ""));
+            }
+        }
+    }
+
+    /**
+     * 发送xml格式数据到微信服务器 告知微信服务器回调信息已经收到。
+     */
+    public static String setXML(String return_code, String return_msg) {
+        return "<xml><return_code><![CDATA[" + return_code
+                + "]]></return_code><return_msg><![CDATA[" + return_msg
+                + "]]></return_msg></xml>";
     }
 
 
