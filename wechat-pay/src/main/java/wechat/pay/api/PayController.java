@@ -330,5 +330,4 @@ public class PayController {
                 + "]]></return_msg></xml>";
     }
 
-
 }
