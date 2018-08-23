@@ -1,17 +1,25 @@
 package wechat.message.utils;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.QuickWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import wechat.message.entity.News;
+import wechat.message.entity.RplTextMessage;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+
 
 public class MessageUtil {
 
@@ -97,7 +105,7 @@ public class MessageUtil {
 	/**
 	 * 解析微信发来的请求（XML）
 	 * 
-	 * @param request
+	 * @param xmlStr
 	 * @return
 	 * @throws Exception
 	 */
@@ -121,13 +129,36 @@ public class MessageUtil {
 		return map;
 	}
 
-	public static void main(String[] args) throws Exception {
-		String xmlStr = "<xml> <ToUserName><![CDATA[toUser]]></ToUserName> <FromUserName><![CDATA[fromUser]]></FromUserName> <CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[this is a test]]></Content><MsgId>1234567890123456</MsgId> </xml>";
-		// TODO Auto-generated method stub
-		Map<String, String> map = MessageUtil.parseXml(xmlStr);
-		for (Entry<String, String> es : map.entrySet()) {
-			System.out.println("k:" + es.getKey() + "--V:" + es.getValue());
-
-		}
+	public static String newsMessageToXml(RplTextMessage newsMessage) {
+		xstream.alias("xml", newsMessage.getClass());
+		xstream.alias("item", new News().getClass());
+		return xstream.toXML(newsMessage);
 	}
+
+	/**
+	 * 对象到xml的处理
+	 */
+	private static XStream xstream = new XStream(new XppDriver() {
+		public HierarchicalStreamWriter createWriter(Writer out) {
+			return new PrettyPrintWriter(out) {
+				// 对所有xml节点的转换都增加CDATA标记
+				boolean cdata = true;
+
+				@SuppressWarnings("rawtypes")
+				public void startNode(String name, Class clazz) {
+					super.startNode(name, clazz);
+				}
+
+				protected void writeText(QuickWriter writer, String text) {
+					if (cdata) {
+						writer.write("<![CDATA[");
+						writer.write(text);
+						writer.write("]]>");
+					} else {
+						writer.write(text);
+					}
+				}
+			};
+		}
+	});
 }

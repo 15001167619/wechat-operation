@@ -1,11 +1,14 @@
 package wechat.message.service.impl;
 
 import org.springframework.stereotype.Service;
+import wechat.message.entity.News;
 import wechat.message.entity.RcvTextMessage;
 import wechat.message.entity.RplTextMessage;
 import wechat.message.service.RplMsgService;
 import wechat.message.utils.MessageUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -42,7 +45,14 @@ public class RplMsgServiceImpl implements RplMsgService {
 		String respContent = "";
 		// 文本消息
 		if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
-			respContent = "欢迎关注微信公众号";
+
+			if("img".equals(rsvMsg.getContent())){
+				//图片
+				respContent = getNewsContent(rplMsg);
+			}else{
+				respContent = "欢迎关注微信公众号";
+			}
+
 		}
 		// 图片消息
 		else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
@@ -75,6 +85,22 @@ public class RplMsgServiceImpl implements RplMsgService {
 			}
 		}
 		rplMsg.setContent(respContent);
+	}
+
+
+	private String getNewsContent(RplTextMessage rplMsg){
+
+		String respContent;
+		rplMsg.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);//设置消息为图文
+		List<News> articleList = new ArrayList<>();
+		articleList.add(new News());
+		// 设置图文消息个数
+		rplMsg.setArticleCount(articleList.size());
+		// 设置图文消息包含的图文集合
+		rplMsg.setArticles(articleList);
+		respContent = MessageUtil.newsMessageToXml(rplMsg);
+
+		return respContent;
 	}
 
 }

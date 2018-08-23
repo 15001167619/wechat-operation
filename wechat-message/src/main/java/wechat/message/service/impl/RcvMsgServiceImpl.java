@@ -1,10 +1,10 @@
 package wechat.message.service.impl;
 
-import com.thinkgem.jeesite.modules.wechat.result.RcvTextMessage;
-import com.thinkgem.jeesite.remote.wechat.RcvMsgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import wechat.message.entity.RcvTextMessage;
+import wechat.message.service.RcvMsgService;
 
 import java.util.Map;
 

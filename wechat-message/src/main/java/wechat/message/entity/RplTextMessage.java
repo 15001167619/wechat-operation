@@ -2,6 +2,8 @@ package wechat.message.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 回复消息</BR>
  * 文本信息
@@ -14,6 +16,11 @@ public class RplTextMessage extends BaseMessage {
 	private String agentId;
 
 	private int funcFlag;
+
+	private int ArticleCount;//消息数量
+
+	private List<News> Articles;//消息体
+
 
 	public String toXML() {
 
