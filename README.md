@@ -8,5 +8,10 @@
 - [微信公众平台支付接口调试工具](https://pay.weixin.qq.com/wiki/tools/signverify/)
 - [微信公众平台网页授权 Demo](https://github.com/15001167619/wechat-operation/tree/master/web-page-authorization)
 - [微信公众平台微信支付 Demo](https://github.com/15001167619/wechat-operation/tree/master/wechat-pay)
+- [微信公众平台消息处理（启用服务器配置） Demo](https://github.com/15001167619/wechat-operation/tree/master/wechat-message)
+
+## 微信公众号注意问题
+
+### 1.消息回复 若返回用户为图文消息  图片路径必须为 服务器配置域名下的图片
 
 
