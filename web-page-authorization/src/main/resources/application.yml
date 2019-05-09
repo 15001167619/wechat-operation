@@ -6,9 +6,9 @@ spring:
     active: dev
 
 wechat:
-  appId: XXXXXX
-  secret: XXXXXXXXXXXXX
-  redirectUrl: http://www.XXXX.com  #微信网页授权配置 回调域名
+  appId: wx2b7233a2f1bff537
+  secret: 753a510eda1eaeb4266c79d841e8ee23
+  redirectUrl: http://mxq.natapp4.cc  #微信网页授权配置 回调域名
 
 logging:
   level.root: info

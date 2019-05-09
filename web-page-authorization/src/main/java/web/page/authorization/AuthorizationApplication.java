@@ -8,11 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author 武海升
  * @version 2.0
  * @description
+ *  访问地址 http://mxq.natapp4.cc/wechat/authorize?returnUrl=https://weibo.com/0926whs
  * @date 2018-07-07 20:05
  */
 @SpringBootApplication
 @Slf4j
-//http://r2jbva.natappfree.cc/wechat/authorize?returnUrl=https://weibo.com/0926whs
+
 public class AuthorizationApplication {
 
     public static void main(String[] args) {
