@@ -3,6 +3,7 @@ package web.page.authorization.config.properties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * @author 武海升
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Data
 @Configuration
+@Component
 @ConfigurationProperties(prefix = "wechat")
 public class WechatProperties {
 
